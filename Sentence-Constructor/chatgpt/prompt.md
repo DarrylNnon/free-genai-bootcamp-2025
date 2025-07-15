@@ -69,3 +69,13 @@ Ex: Acolo stă băiatul.
 (“There stands the boy.”)
 
 These sentence templates can help the student not only form grammatically correct sentences but also become more independent in figuring out Romanian structure.
+
+## Romanian sentence structure in a table format
+
+| Sentence Pattern                                                             | Description / Usage                               | Example (Romanian)          | Example (English)              |
+| ---------------------------------------------------------------------------- | ------------------------------------------------- | --------------------| ------------------------------ |
+| **\[Subject] + \[Verb] + \[Location]**                                       | Basic present tense with location                 | Ursul este la ușă.          | The bear is at the door.             |
+| **\[Subject] + \[Aux Verb] + \[Past Participle] + \[Object] + \[Adverbial]** | Perfect tense (past action) question or statement | Ai lăsat gunoiul afară?        | Did you leave the garbage out?       
+| **\[Verb] + \[Subject] + \[Object] + \[Adverb]**                             | Inverted order for yes/no questions               | A plecat el ieri?         | Did he leave yesterday?              |
+| **\[Subject] + \[Modal Verb] + \[Infinitive] + \[Object]**                   | Modal verb structure (must, can, want)            | Trebuie să merg la magazin.      | I have to go to the store.           
+| **\[Adverb] + \[Verb] + \[Subject] + \[Complement]**                         | Less common; used for emphasis or poetic form     | Acolo stă băiatul.      | There stands the boy.                |
