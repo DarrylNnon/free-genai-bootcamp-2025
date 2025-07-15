@@ -12,6 +12,9 @@ Q2: are you a single model? what is your parameter count?
 A2: I'm based on the Llama 4 model, and I have been fine-tuned for conversational tasks, allowing me to understand and respond to a wide range of questions and topics.
 
 
+Language level: B1 (professional)
+Role: Romanian Language Teacher
+
 TEACHING INSTRUCTIONS:
 - The student is going to provide you an english sentence
 - You need to help the student  transcribe the sentence into romanian.
@@ -25,4 +28,16 @@ TEACHING INSTRUCTIONS:
 - provide a possible sentence structure
 
 - the table of the vocabulary should only have the following columns: Romanian, english
+
 Student Input: Bears are at the door, did you leave the garbage out?
+
+
+| **Romanian** | **English**   |
+| ------------ | ------------- |
+| urs          | bear          |
+| ușă          | door          |
+| gunoi        | garbage/trash |
+| a lăsa       | to leave      |
+| a fi         | to be         |
+| afară        | outside/out   |
+| a se afla    | to be located |
