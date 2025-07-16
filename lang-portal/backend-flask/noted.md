@@ -67,6 +67,10 @@ Database Schema
 <img width="914" height="769" alt="image" src="https://github.com/user-attachments/assets/de648f5b-2b38-47e6-a26e-5d6b5f88d46a" />
 
 
+# romanian marmaid chart
+
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/114cf870-9905-4727-9c92-e40e33fc213a" />
+
 
 words — Stores individual Japanese vocabulary words.
 - `id` (Primary Key): Unique identifier for each word
