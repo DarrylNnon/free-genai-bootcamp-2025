@@ -1,2 +1,2 @@
 # AI-ENGINEER-BOOTCAMP
-Everything you need to be successfull as an AI Engineer
+Everything you need to know to be successfull as an AI Engineer
