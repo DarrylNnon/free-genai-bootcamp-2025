@@ -154,4 +154,4 @@ Infrastructure as Code (IaC) **automates AWS resource creation**, ensuring:
 
 This project is a **personal experiment** to explore the feasibility of running **LLMs on AWS Lambda** using Ollama. It is **not an official AWS architecture recommendation** or an endorsed best practice. While this approach demonstrates a **creative workaround for deploying models within Lambda's constraints**, production-grade applications should consider **AWS-managed solutions** like **Amazon SageMaker** or **Amazon Bedrock** for scalability, reliability, and support.
 
-If you found this toy project useful feel free to connect with me on LinkedIn: https://www.linkedin.com/in/gloriamacia/
+If you found this toy project useful feel free to connect with me on LinkedIn: https://www.linkedin.com/in/francklin-darryl-nnon-b-b812b6126
