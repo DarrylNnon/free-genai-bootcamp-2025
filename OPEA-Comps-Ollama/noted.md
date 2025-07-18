@@ -87,8 +87,9 @@ A: iT does not appear so. The ollama CLI might be running multiple APIs so you n
 
 Q: Will the model be downloaded in the container? does that mean the ml model will be deleted when the container stops running?
 
-The model will download into the container, and vanish when the container stop running. You need to mount a local drive and there is probably more work to be done.
+A: The model will download into the container, and vanish when the container stop running. You need to mount a local drive and there is probably more work to be done.
 
+Q: for the LLM service which can text-generation it suggest it will only work with TGI/VLLM and all you have to do is to have it running. Does TGI and vLLM have a standardize API or is there code to detect which one is running? Do we have to really use Xeon or Guadi processor?
 
 ![alt text](image-2.png)
 
