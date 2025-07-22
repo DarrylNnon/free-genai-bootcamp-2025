@@ -69,3 +69,8 @@ The grading system will do the following:
 - port 5173 the frontend
 
 ![alt text](image-1.png)
+
+## japanese word writing practice
+
+<img width="905" height="382" alt="image" src="https://github.com/user-attachments/assets/aef79200-4437-449f-8dab-6f9f88002365" />
+
