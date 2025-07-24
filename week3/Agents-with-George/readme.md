@@ -10,4 +10,5 @@ you can say something is an agent when it can do 3 things:
 
 -   it keep iterating untill it reach the goal
 
+
 ![alt text](image.png)
