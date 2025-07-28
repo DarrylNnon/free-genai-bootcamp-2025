@@ -114,6 +114,7 @@ uh c and mouse games that are going to be present in this new Computing Paradigm
 
   <img width="649" height="378" alt="image" src="https://github.com/user-attachments/assets/c498877e-a9ab-4c45-9ae6-449a709f3133" />
 
+<img width="466" height="284" alt="image" src="https://github.com/user-attachments/assets/d2894b39-9e28-47dd-a2d5-b3686a5acaf8" />
 
 
 # Slides as PDF: [https://drive.google.com/file/d/1pxx_... (42MB)](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbDA1MjBLeXhNRERyUEMwWFY0YXUyMEl3WUFmd3xBQ3Jtc0traXE1cG5hTzhBY0NrWU1pZUYxWkZQOGhZNzQxR1VNRXplTFhMX1NNVC1OMktxdU9ObkZlYWVEUzM5ZTZOaGFsQ01zYTNseHM3aE1WdkFINEh1bGF5OWtITDBoaGU1ZTRUQ2ExSFBNYmRLN3IyR293TQ&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1pxx_ZI7O-Nwl7ZLNk5hI3WzAsTLwvNU7%2Fview%3Fusp%3Dshare_link&v=zjkBMFhNj_g)
