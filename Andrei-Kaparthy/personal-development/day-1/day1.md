@@ -24,6 +24,7 @@ The llma is just 2 files:
 -   the parameters
 -   the run
 
-##
-Slides as PDF: https://drive.google.com/file/d/1pxx_... (42MB)
-Slides. as Keynote: https://drive.google.com/file/d/1FPUp... (140MB)
+
+# Slides as PDF: [https://drive.google.com/file/d/1pxx_... (42MB)](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbDA1MjBLeXhNRERyUEMwWFY0YXUyMEl3WUFmd3xBQ3Jtc0traXE1cG5hTzhBY0NrWU1pZUYxWkZQOGhZNzQxR1VNRXplTFhMX1NNVC1OMktxdU9ObkZlYWVEUzM5ZTZOaGFsQ01zYTNseHM3aE1WdkFINEh1bGF5OWtITDBoaGU1ZTRUQ2ExSFBNYmRLN3IyR293TQ&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1pxx_ZI7O-Nwl7ZLNk5hI3WzAsTLwvNU7%2Fview%3Fusp%3Dshare_link&v=zjkBMFhNj_g)
+
+# Slides. as Keynote: [https://drive.google.com/file/d/1FPUp... (140MB)](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbDA1MjBLeXhNRERyUEMwWFY0YXUyMEl3WUFmd3xBQ3Jtc0traXE1cG5hTzhBY0NrWU1pZUYxWkZQOGhZNzQxR1VNRXplTFhMX1NNVC1OMktxdU9ObkZlYWVEUzM5ZTZOaGFsQ01zYTNseHM3aE1WdkFINEh1bGF5OWtITDBoaGU1ZTRUQ2ExSFBNYmRLN3IyR293TQ&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1pxx_ZI7O-Nwl7ZLNk5hI3WzAsTLwvNU7%2Fview%3Fusp%3Dshare_link&v=zjkBMFhNj_g)
