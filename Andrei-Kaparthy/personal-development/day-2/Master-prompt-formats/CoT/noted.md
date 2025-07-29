@@ -1,0 +1,3 @@
+# Master prompt format
+
+# CoT
