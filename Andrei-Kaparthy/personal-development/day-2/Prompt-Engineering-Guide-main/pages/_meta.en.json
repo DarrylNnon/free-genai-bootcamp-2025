@@ -1,0 +1,52 @@
+{
+  "index": "Prompt Engineering",
+  "introduction": "Introduction",
+  "techniques": "Prompting Techniques",
+  "agents": "Agents",
+  "guides": "Guides",
+  "applications": "Applications",
+  "prompts": "Prompt Hub",
+  "models": "Models",
+  "risks": "Risks & Misuses",
+  "research": "LLM Research Findings",
+  "papers": "Papers",
+  "tools": "Tools",
+  "notebooks": "Notebooks",
+  "datasets": "Datasets",
+  "readings": "Additional Readings",
+  "courses":{
+    "title": "🎓 Courses",
+    "type": "menu",
+    "items": {
+      "intro-prompt-engineering": {
+        "title": "Intro to Prompt Engineering",
+        "href": "https://dair-ai.thinkific.com/courses/introduction-prompt-engineering"
+      },
+      "advanced-prompt-engineering": {
+        "title": "Advanced Prompt Engineering",
+        "href": "https://dair-ai.thinkific.com/courses/advanced-prompt-engineering"
+      },
+      "intro-ai-agents": {
+        "title": "Intro to AI Agents",
+        "href": "https://dair-ai.thinkific.com/courses/introduction-building-ai-agents"
+      },
+      "rag-systems": {
+        "title": "Build RAG Systems",
+        "href": "https://dair-ai.thinkific.com/courses/introduction-rag"
+      },
+      "advanced-agents": {
+        "title": "Building Advanced AI Agents",
+        "href": "https://dair-ai.thinkific.com/courses/advanced-ai-agents"
+      },
+      "all-courses": {
+        "title": "See all →",
+        "href": "https://dair-ai.thinkific.com/pages/courses"
+      }
+    }
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
+  }
+}
+
