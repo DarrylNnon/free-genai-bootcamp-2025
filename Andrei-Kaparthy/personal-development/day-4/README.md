@@ -1,4 +1,4 @@
-# mini-Project 1: Prompt Playground
+# mini-Project 1: Prompt Playground (CLI or Streamlit)
 
 This Streamlit application serves as a playground for experimenting with and testing various prompt engineering techniques, particularly for DevSecOps use cases like generating secure Infrastructure as Code (IaC).
 
@@ -12,7 +12,7 @@ The goal is to create a simple web UI where you can:
 
 This project directly applies the concepts from Day 2 (Prompt Formats) and Day 3 (Generating Secure IaC).
 
-## 🚀 How to Run
+## How to Run
 
 1.  **Navigate to the project directory:**
     ```bash
