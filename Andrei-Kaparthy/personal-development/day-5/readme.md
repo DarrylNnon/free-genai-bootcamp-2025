@@ -196,7 +196,7 @@ jobs:
 
 ### Step 4: Seeing it in Action
 
-1.  Commit all the files to a new branch in your repository and push it to GitHub.
+1.  Commit all the files to a new branch in your repository and push it to GitHub.ha
     ```bash
     git checkout -b feature/ai-security-scanner
     git add .
