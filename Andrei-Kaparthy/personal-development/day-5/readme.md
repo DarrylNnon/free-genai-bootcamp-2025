@@ -196,7 +196,7 @@ jobs:
 
 ### Step 4: Seeing it in Action
 
-1.  Commit all the files to a new branch in your repository and push it to GitHub.hahahah
+1.  **Commit and Push Your Code:** Run the following commands in your terminal to create a new branch, commit your files, and push the branch to GitHub.
     ```bash
     git checkout -b feature/ai-security-scanner
     git add .
