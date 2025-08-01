@@ -1,0 +1,67 @@
+name: Security Scan and AI Summary
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: write # Required to post a comment
+
+jobs:
+  trivy-scan-and-summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image for scanning
+        run: docker build -t my-app-scan:latest .
+
+      - name: Run Trivy vulnerability scanner
+        id: trivy-scan
+        uses: aquasecurity/trivy-action@0.19.0
+        with:
+          image-ref: 'my-app-scan:latest'
+          format: 'json'
+          output: 'trivy-results.json'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+          # Continue on error so the next step can run
+        continue-on-error: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate AI Summary
+        id: ai-summary
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          SUMMARY=$(python scripts/summarize_scan.py < trivy-results.json)
+          # Use heredoc to handle multiline summary for the output
+          echo "summary<<EOF" >> $GITHUB_OUTPUT
+          echo "$SUMMARY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Post summary to PR comment
+        uses: actions/github-script@v7
+        if: steps.trivy-scan.outcome == 'failure' # Only comment if vulnerabilities are found
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `## 🤖 AI Security Scan Summary
+
+            ${{ steps.ai-summary.outputs.summary }}`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
