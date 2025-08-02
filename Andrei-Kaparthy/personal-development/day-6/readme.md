@@ -81,3 +81,28 @@ The Lambda function in `shot3/lambda_function.py` combines all logic:
 3.  Ensure the Lambda's execution role has permissions for `bedrock:InvokeModel` and DynamoDB actions (`dynamodb:GetItem`, `dynamodb:PutItem`).
 4.  Deploy the code from the `shot3` directory.
 5.  Configure an API Gateway that passes `prompt` and `conversation_id` in the request body.
+---
+
+## Shot 3: Adding Short-Term Memory (Conversational State)
+
+This is the final, complete version of the application. It adds short-term memory to the RAG architecture, allowing for multi-turn, context-aware conversations.
+
+### New Components
+-   **Amazon DynamoDB:** A fast, serverless NoSQL database is used to store and retrieve chat history for each conversation. The table name is configured via the `CHAT_HISTORY_TABLE` environment variable.
+
+### How it Works
+The Lambda function in `shot3/lambda_function.py` combines all logic:
+1.  Receives a `prompt` and a `conversation_id`.
+2.  Retrieves the chat history for that `conversation_id` from DynamoDB.
+3.  Performs the RAG steps from Shot 2 (embedding, vector search) to get relevant context.
+4.  Constructs a final prompt containing the chat history, the RAG context, and the new user prompt.
+5.  Sends the final prompt to the LLM.
+6.  After receiving the LLM's response, it appends the new user message and the AI response to the history.
+7.  Saves the updated history back to DynamoDB.
+
+### How to Deploy (Conceptual)
+1.  Create a DynamoDB table with a primary key of `conversation_id` (String).
+2.  Create an AWS Lambda function and set an environment variable `CHAT_HISTORY_TABLE` to your table's name.
+3.  Ensure the Lambda's execution role has permissions for `bedrock:InvokeModel` and DynamoDB actions (`dynamodb:GetItem`, `dynamodb:PutItem`).
+4.  Deploy the code from the `shot3` directory.
+5.  Configure an API Gateway that passes `prompt` and `conversation_id` in the request body.

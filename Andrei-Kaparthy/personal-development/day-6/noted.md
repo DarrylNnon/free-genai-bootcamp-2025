@@ -6,13 +6,15 @@ Day 6 (Sat):
 
 # study guide 
 
-Of course! It's Day 6, and you're tackling one of the most exciting topics in modern software engineering. I love your idea of using the "few-shot" technique to learn. Just as we give a language model examples to help it understand a task, I'll provide you with a series of architectural "shots" or patterns. Each one is a real-world scenario that adds a new capability, building from a simple starting point to a powerful, end-to-end system.
+It's Day 6, and you're tackling one of the most exciting topics in modern software engineering.using the "few-shot" technique to learn. Just as we give a language model examples to help it understand a task, I'll provide you with a series of architectural "shots" or patterns. Each one is a real-world scenario that adds a new capability, building from a simple starting point to a powerful, end-to-end system.
 
 Let's get you ready to understand, implement, and teach Cloud-Native GenAI architecture.
 
 The "Few-Shot" Guide to Serverless GenAI Architecture
 The core idea of a Cloud-Native GenAI Architecture is to build intelligent applications that are scalable, resilient, and efficient by leveraging cloud services. Using Serverless (like AWS Lambda) means you don't manage servers, you only pay for what you use, and it scales automatically—perfect for unpredictable AI workloads.
 
+
+# shot 1
 
 Shot 1: The Basic API Call (The "Zero-Shot" Architecture)
 This is the simplest, most fundamental pattern. The goal is to send a prompt to an LLM and get a response.
@@ -119,7 +121,6 @@ It then queries the Vector DB to find the most relevant text chunks from your ma
 The Lambda constructs a new, more detailed prompt: "Context: [Relevant text from manuals]... Question: How do I reset the password on product X?"
 This combined prompt is sent to the LLM, which now has the right information to give a factual, specific answer.
 Implementation Snippet (The RAG logic inside your Lambda):
-
 
 ```
 # Inside your lambda_handler, before calling the LLM
