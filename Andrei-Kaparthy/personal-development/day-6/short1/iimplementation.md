@@ -1,13 +1,14 @@
-step-by-step guide to implement and deploy "Shot 1" from end to end, turning the conceptual plan into a practical reality.
+# step-by-step guide to implement and deploy "Shot 1" from end to end, turning the conceptual plan into a practical reality.
 
-Prerequisites
+# Prerequisites
 Before you begin, make sure you have the following installed and configured:
 
-An AWS Account with access to IAM, Lambda, and API Gateway.
-AWS CLI configured with your credentials.
-Python 3.9+ and pip installed on your local machine.
-A text editor or IDE (like VS Code).
-Step 1: Set Up Your Project Directory
+- An AWS Account with access to IAM, Lambda, and API Gateway.
+- AWS CLI configured with your credentials.
+- Python 3.9+ and pip installed on your local machine.
+- A text editor or IDE (like VS Code).
+
+# Step 1: Set Up Your Project Directory
 First, create the necessary files on your local machine.
 
 1- Create a new directory for your project and navigate into it:
