@@ -92,7 +92,7 @@ Now, package your function and its dependies into a .zip file that you can uploa
 1.  install the dependencies into a local directory:
 
 ```sh
-pip install -r requirements.txt -t ./package
+pip install --no-user -r requirements.txt -t ./package
 ```
 
 2.  copy your lamnda function code into the directory:
