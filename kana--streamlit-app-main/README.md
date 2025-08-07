@@ -1,4 +1,4 @@
-# Streamlit Kana app with AWS deployment with Darya Petraska
+# Streamlit Kana app with AWS deployment with Darryl Francklin
 
 Learn Japanese kana (Katakana, Hiragana) with the help of a Streamlit app deployed on AWS!
 
