@@ -17,7 +17,7 @@ PROMPT_TEMPLATE_FILE = "prompts/secure_iac_generator.md"
 
 # --- Helper Functions ---
 
-def call_openai_api(prompt, model="gpt-4-turbo-preview"):
+def call_openai_api(prompt, model="gpt-4o"):
     """A generic function to call the OpenAI ChatCompletion API."""
     try:
         client = openai.OpenAI()
@@ -27,8 +27,20 @@ def call_openai_api(prompt, model="gpt-4-turbo-preview"):
             temperature=0.2,  # Lower temperature for more predictable code generation
         )
         return completion.choices[0].message.content
+    except openai.APIStatusError as e:
+        if e.status_code == 429:
+            error_details = e.response.json().get("error", {})
+            if error_details.get("code") == "insufficient_quota":
+                print("\n❌ Error: OpenAI API request failed due to insufficient quota.")
+                print("   Please check your plan and billing details at https://platform.openai.com/account/billing/overview")
+            else:
+                print("\n❌ Error: OpenAI API request failed due to rate limiting.")
+                print("   Please check your rate limits at https://platform.openai.com/account/limits and try again later.")
+        else:
+            print(f"\n❌ An unexpected OpenAI API error occurred: {e.status_code} - {e.response.text}")
+        sys.exit(1)
     except Exception as e:
-        print(f"Error calling OpenAI API: {e}")
+        print(f"An unexpected error occurred when calling the OpenAI API: {e}")
         sys.exit(1)
 
 def extract_terraform_code(response_text):
@@ -134,7 +146,7 @@ def main():
     except FileNotFoundError:
         sys.exit(f"Error: Prompt template file not found at {PROMPT_TEMPLATE_FILE}")
 
-    generation_prompt = prompt_template.format(user_request=user_request)
+    generation_prompt = prompt_template.replace("{user_request}", user_request)
     raw_response = call_openai_api(generation_prompt)
     terraform_code = extract_terraform_code(raw_response)
 
