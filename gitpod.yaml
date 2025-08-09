@@ -5,6 +5,11 @@ tasks:
       curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
       sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
       sudo apt-get update && sudo apt-get install terraform
+  - name: tfsec
+    init: |
+      curl -L "$(curl -s https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-amd64")" -o tfsec
+      chmod +x tfsec
+      sudo mv tfsec /usr/local/bin/
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
