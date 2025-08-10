@@ -1,0 +1,8 @@
+main.tf
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+/venv/
+__pycache__/
+*.pyc
+*.log

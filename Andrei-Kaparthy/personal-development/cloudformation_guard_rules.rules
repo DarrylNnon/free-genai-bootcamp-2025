@@ -1,0 +1,8 @@
+let s3_bucket = Resources.*[ Type == "AWS::S3::Bucket" ]
+
+rule s3_bucket_versioning_enabled when %s3_bucket !empty {
+    %s3_bucket.Properties.VersioningConfiguration.Status == "Enabled"
+    <<
+      S3 bucket versioning must be enabled.
+    >>
+}
