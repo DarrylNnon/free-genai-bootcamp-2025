@@ -18,11 +18,23 @@ Checkov_rules.rules: Checkov rules file.
 
 -   Set `OPENAI API KEY`:Set your OpenAI API keys as environment variable: `export OPENAI_API_KEY="YOUR_API_KEY"`
 
--   Install python depencies: `pip install -r requrirements.txt`
+-   Install python depencies: `pip install -r requirements.txt`
 -   Make `validation.sh` executable: `chmod +x validation.sh`
 -   Run the python script: `python gpt_to_terraform.py` (this will generate main.tf)
 -   Run the validation script: `./validation.sh`
 
 
-# Explanation 
+# checkov and cloudformation guard installation instruction
+
+```sh
+pip install checkov
+checkov --version
+```
+
+Cloudformation Guard: can be installed using `cargo` or by downloading pre-build binaries. Here are the instructions `cargo`:
+
+```sh
+cargo install cfn-guard
+cfn-guard --version
+```
 
