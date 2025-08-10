@@ -1,20 +1,38 @@
 import os
+import re
 from openai import OpenAI
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Load your OpenAI API key from an environment variable
 
+def extract_terraform_code(response_text):
+    """Extracts Terraform code from a Markdown code block."""
+    # The model might wrap the code in a markdown block
+    match = re.search(r"```(?:terraform)?\n(.*?)\n```", response_text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    # If no markdown block is found, assume the whole response is code
+    return response_text.strip()
+
 def generate_terraform_code(prompt):
     """Generates Terraform code using GPT based on the given prompt."""
     try:
-        response = client.completions.create(engine="text-davinci-003",  # Or your preferred engine
-        prompt=prompt,
-        max_tokens=500,  # Adjust as needed
-        n=1,
-        stop=None,
-        temperature=0.7)
-        return response.choices[0].text.strip()
+        # Using the recommended Chat Completions endpoint, which is more capable.
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",  # A modern and cost-effective model
+            messages=[
+                {"role": "system", "content": "You are a Terraform expert. You will be given a prompt and you must generate the corresponding HCL code. Only output the code, with no additional explanation."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=500,  # Adjust as needed
+            n=1,
+            stop=None,
+            temperature=0.2 # Lower temperature for more predictable code
+        )
+        # The response from chat models is in a different attribute
+        raw_code = response.choices[0].message.content
+        return extract_terraform_code(raw_code)
     except Exception as e:
         print(f"Error generating Terraform code: {e}")
         return None
