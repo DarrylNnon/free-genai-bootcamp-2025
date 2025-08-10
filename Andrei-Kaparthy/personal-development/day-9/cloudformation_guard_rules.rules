@@ -1,8 +1,7 @@
-let s3_bucket = Resources.*[ Type == "AWS::S3::Bucket" ]
+# This rule checks if an aws_s3_bucket resource has versioning enabled.
+# cfn-guard can parse Terraform HCL and map it to a resource model.
+let s3_buckets = Resources.*[ Type == 'aws_s3_bucket' ]
 
-rule s3_bucket_versioning_enabled when %s3_bucket !empty {
-    %s3_bucket.Properties.VersioningConfiguration.Status == "Enabled"
-    <<
-      S3 bucket versioning must be enabled.
-    >>
+rule s3_bucket_versioning_enabled when %s3_buckets !empty {
+    %s3_buckets.Properties.versioning.enabled == true
 }

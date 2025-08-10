@@ -10,6 +10,6 @@ checkov -f main.tf
 
 # Run CloudFormation Guard
 echo "Running CloudFormation Guard..."
-cfn-guard validate --data main.tf --rules cloudformation_guard_rules.rules --output-format text
+cfn-guard validate --data main.tf --rules cloudformation_guard_rules.rules --output-format single-line-summary
 
 echo "Terraform validation complete."
