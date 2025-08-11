@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IaC GPT Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ IaC GPT Assistant</h1>
+            <p>Generate secure Infrastructure as Code with AI</p>
+        </header>
+
+        <div class="examples">
+            <h3>Example prompts:</h3>
+            <div class="example-buttons">
+                <button onclick="setExample('Create a secure S3 bucket with encryption')">S3 Bucket</button>
+                <button onclick="setExample('Deploy a VPC with public and private subnets')">VPC Setup</button>
+                <button onclick="setExample('Create an EC2 instance with security groups')">EC2 Instance</button>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <textarea id="prompt" placeholder="Describe your infrastructure requirements..."></textarea>
+            <button id="generate-btn" onclick="generateIaC()">Generate IaC</button>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Generating your infrastructure code...</p>
+        </div>
+
+        <div id="result" class="result hidden">
+            <h3>Generated Infrastructure Code & Security Report</h3>
+            <pre id="output"></pre>
+        </div>
+    </div>
+
+    <script>
+        function setExample(text) {
+            document.getElementById('prompt').value = text;
+        }
+
+        async function generateIaC() {
+            const prompt = document.getElementById('prompt').value.trim();
+            if (!prompt) {
+                alert('Please enter a prompt');
+                return;
+            }
+
+            const generateBtn = document.getElementById('generate-btn');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+
+            generateBtn.disabled = true;
+            loading.classList.remove('hidden');
+            result.classList.add('hidden');
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                document.getElementById('output').textContent = data.report;
+                result.classList.remove('hidden');
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                generateBtn.disabled = false;
+                loading.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('prompt').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                generateIaC();
+            }
+        });
+    </script>
+</body>
+</html>
