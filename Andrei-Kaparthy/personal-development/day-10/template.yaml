@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  IaC GPT Assistant - A web interface to generate and scan Terraform code.
+
+Parameters:
+  OpenAiApiKey:
+    Type: String
+    Description: Your OpenAI API Key.
+    NoEcho: true
+  TfsecLayerArn:
+    Type: String
+    Description: The ARN of the Lambda Layer containing the tfsec binary.
+
+Globals:
+  Function:
+    Timeout: 60 # Increased timeout for LLM calls
+    MemorySize: 512
+
+Resources:
+  IacAssistantFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          OPENAI_API_KEY: !Ref OpenAiApiKey
+      Layers:
+        - !Ref TfsecLayerArn
+      Events:
+        ApiEvent:
+          Type: HttpApi # Using HttpApi for lower cost and latency
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+
+Outputs:
+  ApiEndpoint:
+    Description: "API Gateway endpoint URL for your application"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/"
