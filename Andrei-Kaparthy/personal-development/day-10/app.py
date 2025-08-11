@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import awsgi
-from iac_assistant.main import orchestrate_iac_generation
+from main import orchestrate_iac_generation
 
 app = Flask(__name__)
 

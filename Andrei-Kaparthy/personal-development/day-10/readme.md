@@ -17,6 +17,10 @@ Before you begin, ensure you have the following installed and configured:
 
 *   **AWS CLI**: Configured with your AWS credentials (`aws configure`).
 *   **AWS SAM CLI**: Installation Guide
+```sh
+- curl -L -o sam-installation.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+- unzip sam-installation.zip -d sam-installation && sudo ./sam-installation/install
+```
 *   **Docker**: Must be running on your local machine. SAM uses it to build deployment packages.
 *   **OpenAI API Key**: Your secret key from OpenAI.
 
