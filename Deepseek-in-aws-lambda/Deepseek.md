@@ -1,4 +1,4 @@
-# Deepseek in AWS Lambda with Gloria
+# Deepseek in AWS Lambda with Francklin
 
 start by opening:
 
