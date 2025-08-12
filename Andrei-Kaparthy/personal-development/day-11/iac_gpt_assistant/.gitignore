@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Environment
+.env
+
+# Terraform & tfsec temporary files
+*.tf
+tfsec-results.json
