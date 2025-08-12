@@ -9,7 +9,7 @@ to see the ollama models library
 
 ![alt text](image.png)
 
-# github repo of Gloria to practice aws lambda with deepseek
+# github repo of Francklin to practice aws lambda with deepseek
 
 https://github.com/gloriamacia/aws-lambda-deepseek-ollama-llm
 
