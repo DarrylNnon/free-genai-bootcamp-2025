@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IaC GPT Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IaC GPT Assistant 🤖</h1>
+            <p>Turn plain English into secure, validated Terraform code.</p>
+        </header>
+
+        <main>
+            <form id="iac-form">
+                <label for="user-request">Describe the infrastructure you need:</label>
+                <textarea id="user-request" name="request" rows="4" placeholder="e.g., A secure, private S3 bucket for application logs with versioning enabled."></textarea>
+                <button type="submit" id="generate-btn">Generate & Secure</button>
+            </form>
+
+            <div id="results-container" class="hidden">
+                <div id="status-updates">
+                    <div class="loader-container">
+                        <div class="loader"></div>
+                        <p id="status-text">Processing your request...</p>
+                    </div>
+                </div>
+
+                <div id="final-output" class="hidden">
+                    <h2>Final Terraform Code</h2>
+                    <div class="code-container">
+                        <pre><code id="terraform-code" class="language-hcl"></code></pre>
+                        <button id="copy-code-btn">Copy Code</button>
+                    </div>
+
+                    <h2>AI-Generated Report</h2>
+                    <div id="report-output" class="report-container">
+                        <!-- The report HTML will be injected here -->
+                    </div>
+                </div>
+                 <div id="error-output" class="hidden error-container">
+                    <h3>An Error Occurred</h3>
+                    <p id="error-message"></p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Day 11 Project | GenAI DevSecOps Engineer Bootcamp</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

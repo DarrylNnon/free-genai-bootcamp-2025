@@ -1,58 +1,40 @@
 import os
-import markdown
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
+import markdown2
+
 from iac_assistant import process_iac_request
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
-# A secret key is required for using sessions in Flask
-app.secret_key = os.getenv("FLASK_SECRET_KEY", os.urandom(24))
 
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/")
 def index():
-    """
-    Handles the main page.
-    GET: Displays the input form.
-    POST: Processes the user's request, stores the result in the session,
-          and redirects to the result page.
-    """
-    if request.method == 'POST':
-        user_request = request.form.get('prompt', '').strip()
-        if not user_request:
-            return render_template('index.html', error="Request cannot be empty.")
+    """Renders the main page."""
+    return render_template("index.html")
 
-        # Process the request using the core logic from iac_assistant.py
-        result = process_iac_request(user_request)
+@app.route("/api/generate", methods=["POST"])
+def api_generate():
+    """API endpoint to handle IaC generation requests."""
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
 
-        # Store the result and original request in the session
-        session['result_data'] = result
-        session['user_request'] = user_request
-        
-        # Redirect to the results page (Post/Redirect/Get pattern)
-        return redirect(url_for('results'))
+    data = request.get_json()
+    user_request = data.get("request")
 
-    return render_template('index.html')
+    if not user_request:
+        return jsonify({"error": "No request provided"}), 400
 
+    # Call the main processing logic from our assistant
+    result = process_iac_request(user_request)
 
-@app.route('/results')
-def results():
-    """Displays the results of the IaC generation and scan."""
-    result_data = session.get('result_data')
-    user_request = session.get('user_request')
+    # Convert the markdown report to HTML for easy rendering
+    if "report" in result and result["report"]:
+        result["report_html"] = markdown2.markdown(result["report"], extras=["fenced-code-blocks", "tables"])
 
-    if not result_data or not user_request:
-        return redirect(url_for('index'))
+    return jsonify(result)
 
-    # Convert markdown report to HTML for rendering
-    if 'report' in result_data:
-        result_data['report_html'] = markdown.markdown(result_data['report'], extensions=['fenced_code', 'tables'])
-
-    return render_template('result.html', result=result_data, user_request=user_request)
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

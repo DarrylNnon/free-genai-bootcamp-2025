@@ -45,7 +45,7 @@ def extract_code_block(text: str) -> str:
 
 def generate_terraform(user_request: str) -> str | None:
     """Generates Terraform code from a user request."""
-    prompt_template = get_prompt_template("secure_iac_generator.md")
+    prompt_template = get_prompt_template("generate_iac.md")
     prompt = prompt_template.format(user_request=user_request)
     response = call_openai_api(prompt)
     return extract_code_block(response) if response else None
@@ -90,7 +90,7 @@ def run_security_scan(terraform_code: str) -> dict | None:
 
 def fix_terraform(terraform_code: str, tfsec_results_json: str) -> str | None:
     """Attempts to fix Terraform code based on tfsec results."""
-    prompt_template = get_prompt_template("iac_fixer.md")
+    prompt_template = get_prompt_template("fix_iac.md")
     prompt = prompt_template.format(
         terraform_code=terraform_code, tfsec_results_json=tfsec_results_json
     )
@@ -102,7 +102,7 @@ def generate_report(
     user_request: str, terraform_code: str, tfsec_results_json: str
 ) -> str | None:
     """Generates a final, human-readable report."""
-    prompt_template = get_prompt_template("iac_report_generator.md")
+    prompt_template = get_prompt_template("generate_report.md")
     prompt = prompt_template.format(
         user_request=user_request,
         terraform_code=terraform_code,

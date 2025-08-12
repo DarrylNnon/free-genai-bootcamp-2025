@@ -1,0 +1,4 @@
+- Provide ONLY the complete report in Markdown format.
+- Do not include any other text, introductions, or explanations outside of the report itself.
+- Use markdown elements like headings, bold text, code blocks, and lists to make the report easy to read.
+- Use a collapsible `<details>` tag for the Terraform code block, with the summary "Click to view the Final Terraform Code".

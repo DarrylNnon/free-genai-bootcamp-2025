@@ -1,4 +1,5 @@
-openai
 flask
+openai
 python-dotenv
 Markdown
+markdown2
