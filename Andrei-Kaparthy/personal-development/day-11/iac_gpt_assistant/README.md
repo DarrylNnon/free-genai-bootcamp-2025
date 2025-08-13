@@ -73,3 +73,12 @@ flask run
 ```
 
 Open your browser and navigate to `http://127.0.0.1:5000`. You're ready to go!
+
+# prompt format meaning
+
+1- `generated_iac.md`: this prompt is designed to guide the AI in creating high-quality, secure-by-defaut teerform code.
+
+
+2- `analyze_scan.md`: this prompt is ffor a more focus task: taking raw `tfsec` json output and translating it into a developer-friendly analysis.explains seccurity finding.
+
+3- `generated_report.md`: this prompt is an enhance version for generating the final user-friendly report. It's structure to produce a complete , well-organized document that synthesize the entire workflow, from the initial request to the final.
