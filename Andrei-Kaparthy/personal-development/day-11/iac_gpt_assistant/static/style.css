@@ -1,0 +1,126 @@
+/* static/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600&display=swap');
+
+:root {
+    --bg-color: #1a1b26;
+    --fg-color: #a9b1d6;
+    --card-bg: #24283b;
+    --border-color: #414868;
+    --primary-color: #7aa2f7;
+    --error-color: #f7768e;
+    --success-color: #9ece6a;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--primary-color);
+}
+
+#iac-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: #1e2030;
+    color: var(--fg-color);
+    font-family: 'Roboto Mono', monospace;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+#iac-form button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#iac-form button:hover {
+    background-color: #9abdfa;
+}
+
+.hidden {
+    display: none;
+}
+
+#result-container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+#loader {
+    text-align: center;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#output h2 {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+#output pre {
+    background-color: #1e2030;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+}
+
+#output code {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--fg-color);
+}
+
+.error {
+    color: var(--error-color);
+    font-weight: bold;
+}
