@@ -76,9 +76,44 @@ Open your browser and navigate to `http://127.0.0.1:5000`. You're ready to go!
 
 # prompt format meaning
 
-1- `generated_iac.md`: this prompt is designed to guide the AI in creating high-quality, secure-by-defaut teerform code.
+1- `generated_iac.md`: this prompt is designed to guide the AI in creating high-quality, secure-by-defaut terraform code.
 
 
 2- `analyze_scan.md`: this prompt is ffor a more focus task: taking raw `tfsec` json output and translating it into a developer-friendly analysis.explains seccurity finding.
 
 3- `generated_report.md`: this prompt is an enhance version for generating the final user-friendly report. It's structure to produce a complete , well-organized document that synthesize the entire workflow, from the initial request to the final.
+
+
+# testing the application
+
+# installing testing libraries:
+we'll use `pytest`, a popular and powerful testing framework, along with pytest-mock for handling external dependencies.
+
+```sh
+pip install pytest pytest-mock
+```
+
+# Unit testing the core logic(iac_asssitant.py)
+
+The most critical part is to test the functions in `iac_assistant.py`. The key is to mock external calls-like the OPenAI API and the `tfsec` command, so you can test your python logic without actually making network requests or running external programs.
+
+# create a new file for these tests.
+
+```sh
+test_iac_assistant.py
+```
+
+# testing the Flask API (app.py)
+
+Next, let test the web layer. we will use flask's test client to simulate web requests and check the responses. Here, we mock the entire `process_iac_request` to isolate our API endpoint logic.
+
+```sh
+create another file
+test_app.py
+```
+
+# How to run
+
+Now that these tests are written, running them is simple. From your project's root directory`(iac_gpt_assistant/)`, just run `pytest` command.
+
+Pytest will automatically discover and run all the files in the `tests/` directory.
