@@ -1,0 +1,7 @@
+version=0.1
+[default.siem.parameters]
+s3_bucket = "my-siem-log-fd"
+region = "us-east-1"
+[default.deploy.parameters]
+s3_bucket = "my-siem-log-fd"
+region = "us-east-1"

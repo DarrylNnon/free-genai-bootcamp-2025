@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Day 12 Project: An AI-powered SIEM log analyzer that ingests logs from
+  CloudWatch, analyzes them with a GPT model, and logs the results.
+
+  '
+Parameters:
+  OpenAIAPIKey:
+    Type: String
+    NoEcho: true
+    Description: Required. Your secret API key for the OpenAI service.
+    MinLength: 1
+Resources:
+  LogAnalyzerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: ${AWS::StackName}-LogAnalyzerFunction
+      Description: Receives logs from a monitored CloudWatch Log Group, sends them
+        to an LLM for analysis, and logs the report.
+      CodeUri: LogAnalyzerFunction
+      Handler: lambda_function.handler
+      Runtime: python3.9
+      Timeout: 30
+      MemorySize: 256
+      Environment:
+        Variables:
+          OPENAI_API_KEY:
+            Ref: OpenAIAPIKey
+      Events:
+        LogProcessingTrigger:
+          Type: CloudWatchLogs
+          Properties:
+            LogGroupName:
+              Ref: MonitoredLogGroup
+            FilterPattern: ''
+    Metadata:
+      SamResourceId: LogAnalyzerFunction
+  MonitoredLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName:
+        Fn::Sub: /sam/${AWS::StackName}/MonitoredLogGroup
+      RetentionInDays: 7
+Outputs:
+  MonitoredLogGroupName:
+    Description: The name of the CloudWatch Log Group to send logs to for analysis.
+    Value:
+      Ref: MonitoredLogGroup
+  LogAnalyzerFunctionLogs:
+    Description: The name of the CloudWatch Log Group for the analyzer function's
+      output.
+    Value:
+      Fn::Sub: /aws/lambda/${LogAnalyzerFunction}
