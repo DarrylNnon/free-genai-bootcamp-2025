@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Day 12 Project: Deploys a serverless SIEM log analyzer that uses
+  an LLM to detect threats in CloudWatch logs.
+
+Parameters:
+  OpenAIAPIKey:
+    Type: String
+    NoEcho: true
+    Description: Your secret API key for the OpenAI service.
+
+Resources:
+  # The Lambda function that contains the analysis logic
+  LogAnalyzerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-LogAnalyzerFunction"
+      Description: Receives logs from CloudWatch, analyzes them with an LLM, and logs the results.
+      CodeUri: src/
+      Handler: lambda_function.handler
+      Runtime: python3.9
+      Timeout: 30
+      MemorySize: 256
+      Environment:
+        Variables:
+          OPENAI_API_KEY: !Ref OpenAIAPIKey
+      Policies:
+        # Basic policy for Lambda to write its own logs
+        - AWSLambdaBasicExecutionRole
+
+  # The CloudWatch Log Group that our application/service would write to.
+  # We will monitor this log group for new entries.
+  MonitoredLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "${AWS::StackName}-MonitoredLogGroup"
+      RetentionInDays: 7
+
+  # This is the trigger. It connects the MonitoredLogGroup to our Lambda function.
+  # Any log written to MonitoredLogGroup will now invoke LogAnalyzerFunction.
+  LogSubscriptionFilter:
+    Type: AWS::Logs::SubscriptionFilter
+    Properties:
+      LogGroupName: !Ref MonitoredLogGroup
+      FilterPattern: "" # Empty pattern matches all logs
+      DestinationArn: !GetAtt LogAnalyzerFunction.Arn
+
+  # This permission is required for CloudWatch Logs to be able to invoke our Lambda function.
+  # SAM doesn't always create this automatically for subscription filters, so we define it explicitly.
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt LogAnalyzerFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: !Sub "logs.${AWS::Region}.amazonaws.com"
+      SourceArn: !GetAtt MonitoredLogGroup.Arn
+
+Outputs:
+  MonitoredLogGroupName:
+    Description: "The name of the CloudWatch Log Group to send logs to for analysis."
+    Value: !Ref MonitoredLogGroup
