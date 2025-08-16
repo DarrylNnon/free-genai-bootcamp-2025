@@ -1,0 +1,17 @@
+# AWS SAM
+# Build artifacts from 'sam build'
+.aws-sam/
+
+# Python
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Cache files
+__pycache__/
+*.pyc
+
+# IDE settings
+.vscode/
+.idea/
