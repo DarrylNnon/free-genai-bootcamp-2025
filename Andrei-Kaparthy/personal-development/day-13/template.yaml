@@ -34,6 +34,12 @@ Resources:
       Policies:
         # Give the Lambda permission to write its own logs to CloudWatch
         - CloudWatchPutMetricPolicy: {}
+      Events:
+        LogProcessingTrigger:
+          Type: CloudWatchLogs
+          Properties:
+            LogGroupName: !Ref MonitoredLogGroup
+            FilterPattern: "" # Empty pattern matches all log events
 
   # This is the CloudWatch Log Group that our Lambda function will write its output to.
   # SAM creates this implicitly, but we can access its name.
@@ -45,21 +51,3 @@ Resources:
     Properties:
       LogGroupName: /siem/day13/monitored-logs
       RetentionInDays: 7
-
-  # This is the subscription filter that triggers the Lambda function.
-  # It watches the MonitoredLogGroup for any new log messages.
-  LogSubscriptionFilter:
-    Type: AWS::Logs::SubscriptionFilter
-    Properties:
-      LogGroupName: !Ref MonitoredLogGroup
-      FilterPattern: "" # Empty pattern matches all log events
-      DestinationArn: !GetAtt LogAnalyzerFunction.Arn
-
-  # This permission allows CloudWatch Logs to invoke our Lambda function.
-  LambdaInvokePermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !GetAtt LogAnalyzerFunction.Arn
-      Action: lambda:InvokeFunction
-      Principal: !Sub "logs.${AWS::Region}.amazonaws.com"
-      SourceArn: !GetAtt MonitoredLogGroup.Arn
