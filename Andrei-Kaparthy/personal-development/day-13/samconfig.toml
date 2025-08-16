@@ -1,0 +1,12 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "siem-log-analyzer-day13"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-legdozugv9c4"
+resolve_s3 = true
+s3_prefix = "siem-log-analyzer-day13"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []

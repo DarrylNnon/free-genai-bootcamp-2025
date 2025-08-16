@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Day 13 Project: An advanced SIEM Log Analyzer that uses GPT to analyze
+  logs, classify severity with CVSS, and provide actionable alerts in a structured
+  JSON format.
+
+  '
+Parameters:
+  OpenAIAPIKey:
+    Type: String
+    Description: Your OpenAI API Key.
+    NoEcho: true
+Globals:
+  Function:
+    Timeout: 60
+    MemorySize: 256
+Resources:
+  LogAnalyzerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Zip
+      CodeUri: LogAnalyzerFunction
+      Handler: lambda_function.handler
+      Runtime: python3.12
+      Architectures:
+      - x86_64
+      FunctionName: Day13-SIEM-Log-Analyzer-Function
+      Description: Receives logs from CloudWatch, analyzes them with GPT for threats,
+        and logs a structured analysis.
+      Environment:
+        Variables:
+          OPENAI_API_KEY:
+            Ref: OpenAIAPIKey
+      Policies:
+      - CloudWatchPutMetricPolicy: {}
+    Metadata:
+      SamResourceId: LogAnalyzerFunction
+  MonitoredLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /siem/day13/monitored-logs
+      RetentionInDays: 7
+  LogSubscriptionFilter:
+    Type: AWS::Logs::SubscriptionFilter
+    Properties:
+      LogGroupName:
+        Ref: MonitoredLogGroup
+      FilterPattern: ''
+      DestinationArn:
+        Fn::GetAtt:
+        - LogAnalyzerFunction
+        - Arn
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+        - LogAnalyzerFunction
+        - Arn
+      Action: lambda:InvokeFunction
+      Principal:
+        Fn::Sub: logs.${AWS::Region}.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+        - MonitoredLogGroup
+        - Arn

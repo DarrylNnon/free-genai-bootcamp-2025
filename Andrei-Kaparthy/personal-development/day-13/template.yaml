@@ -23,7 +23,7 @@ Resources:
       PackageType: Zip
       CodeUri: src/
       Handler: lambda_function.handler
-      Runtime: python3.11
+      Runtime: python3.12
       Architectures:
         - x86_64
       FunctionName: Day13-SIEM-Log-Analyzer-Function
