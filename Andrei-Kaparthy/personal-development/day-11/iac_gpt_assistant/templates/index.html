@@ -4,84 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IaC GPT Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>IaC GPT Assistant 🤖</h1>
-            <p>Turn natural language into secure, validated Terraform code.</p>
+            <div class="logo">IaC GPT Assistant 🤖</div>
+            <p class="subtitle">Your AI partner for generating secure, validated Infrastructure as Code.</p>
         </header>
         <main>
             <form id="iac-form">
                 <label for="user-request">Describe the infrastructure you need:</label>
-                <textarea id="user-request" name="request" rows="4" placeholder="e.g., 'A secure S3 bucket for private logs with versioning enabled'"></textarea>
-                <button type="submit">Generate Code</button>
+                <div class="textarea-wrapper">
+                    <textarea id="user-request" name="request" rows="4" placeholder="e.g., 'A secure S3 bucket for private logs with versioning enabled'"></textarea>
+                </div>
+                <div class="example-prompts">
+                    <span>Try an example:</span>
+                    <button type="button" class="example-btn">Secure S3 Bucket</button>
+                    <button type="button" class="example-btn">RDS Database</button>
+                    <button type="button" class="example-btn">EC2 Security Group</button>
+                </div>
+                <button type="submit" id="generate-btn">
+                    <span class="btn-text">Generate & Secure</span>
+                </button>
             </form>
+
             <div id="result-container" class="hidden">
                 <div id="loader" class="hidden">
                     <div class="spinner"></div>
-                    <p>Generating, scanning, and reporting... this may take a moment.</p>
+                    <p>AI is thinking... Generating, scanning, and building your report.</p>
                 </div>
-                <div id="output">
-                    <h2>Generated Code</h2>
-                    <pre><code id="generated-code"></code></pre>
-                    <h2>AI-Powered Report</h2>
-                    <div id="report"></div>
+
+                <div id="output-grid" class="hidden">
+                    <div class="output-panel">
+                        <div class="panel-header">
+                            <h3>Generated Terraform Code</h3>
+                            <button id="copy-code-btn">Copy Code</button>
+                        </div>
+                        <pre><code id="generated-code" class="language-terraform"></code></pre>
+                    </div>
+                    <div class="output-panel">
+                        <div class="panel-header">
+                            <h3>AI-Powered Security Report</h3>
+                        </div>
+                        <div id="report" class="report-content"></div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
-    <script>
-        document.getElementById('iac-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const userRequest = document.getElementById('user-request').value;
-            const resultContainer = document.getElementById('result-container');
-            const loader = document.getElementById('loader');
-            const output = document.getElementById('output');
-            const generatedCodeEl = document.getElementById('generated-code');
-            const reportEl = document.getElementById('report');
-
-            if (!userRequest.trim()) {
-                alert('Please enter a request.');
-                return;
-            }
-
-            // Show loader and hide previous results
-            resultContainer.classList.remove('hidden');
-            loader.classList.remove('hidden');
-            output.classList.add('hidden');
-
-            try {
-                const response = await fetch('/api/generate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ request: userRequest }),
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'An unknown error occurred.');
-                }
-
-                const data = await response.json();
-
-                // Display results
-                generatedCodeEl.textContent = data.final_code || 'No code generated.';
-                reportEl.innerHTML = data.report_html || '<p>No report generated.</p>';
-                
-                output.classList.remove('hidden');
-
-            } catch (error) {
-                reportEl.innerHTML = `<p class="error"><strong>Error:</strong> ${error.message}</p>`;
-                output.classList.remove('hidden');
-            } finally {
-                loader.classList.add('hidden');
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
