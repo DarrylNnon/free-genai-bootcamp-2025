@@ -20,7 +20,7 @@ def get_prompt_template(name: str) -> str:
         return ""
 
 
-def call_openai_api(prompt: str, model: str = "gpt-4-turbo-preview") -> str | None:
+def call_openai_api(prompt: str, model: str = "gpt-4o") -> str | None:
     """Calls the OpenAI API and returns the response content."""
     try:
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -108,7 +108,7 @@ def generate_report(
         terraform_code=terraform_code,
         tfsec_results_json=tfsec_results_json,
     )
-    return call_openai_api(prompt, model="gpt-4-turbo-preview")
+    return call_openai_api(prompt, model="gpt-4o")
 
 
 def process_iac_request(user_request: str) -> dict:
