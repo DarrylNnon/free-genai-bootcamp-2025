@@ -14,25 +14,6 @@ For each identified threat, you must:
 </TASK>
 
 <OUTPUT_FORMAT>
-
-## 1. Threat: [Clear, descriptive name of the threat]
-- **Description**: [Detailed description of the threat and which component/flow it affects.]
-- **Risk Level**: **[Critical | High | Medium | Low]**
-- **Mitigation**: [Description of a potential mitigation.]
-- **DREAD Risk Assessment**:
-| Category | Rating (1-10) | Justification |
-
-## 1. Threat: Unrestricted File Upload Leading to Remote Code Execution
-- **Description**: An attacker could upload a malicious file (e.g., a PHP shell) to the public S3 bucket. If a web server later executes or includes files from this bucket, it could lead to remote code execution on the server.
-- **Risk Level**: **High**
-- **Mitigation**: Implement strict file type validation on upload (allow-listing safe types), scan all uploaded files for malware, and configure the web server to never execute files from the uploads bucket.
-- **DREAD Risk Assessment**:
-| Category | Rating (1-10) | Justification |
-
-
-</TASK>
-
-<OUTPUT_FORMAT>
 Produce a Markdown-formatted report with the following structure, using a table for the DREAD ratings.
 
 ```markdown
@@ -40,6 +21,7 @@ Produce a Markdown-formatted report with the following structure, using a table 
 
 ## 1. Threat: [Clear, descriptive name of the threat]
 - **Description**: [Detailed description of the threat and which component/flow it affects.]
+- **Risk Level**: **[Calculated Risk Level: Low, Medium, High, or Critical]**
 - **Mitigation**: [Description of a potential mitigation.]
 - **DREAD Risk Assessment**:
 | Category | Rating (1-10) | Justification |
@@ -70,6 +52,7 @@ Produce a Markdown-formatted report with the following structure, using a table 
 
 ## 1. Threat: Unrestricted File Upload Leading to Remote Code Execution
 - **Description**: An attacker could upload a malicious file (e.g., a PHP shell) to the public S3 bucket. If a web server later executes or includes files from this bucket, it could lead to remote code execution on the server.
+- **Risk Level**: **High**
 - **Mitigation**: Implement strict file type validation on upload (allow-listing safe types), scan all uploaded files for malware, and configure the web server to never execute files from the uploads bucket.
 - **DREAD Risk Assessment**:
 | Category | Rating (1-10) | Justification |

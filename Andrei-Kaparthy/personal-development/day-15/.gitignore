@@ -1,0 +1,11 @@
+# Virtual Environment
+# Used for Python dependencies
+.venv/
+
+# Environment variables
+# Contains sensitive keys like OPENAI_API_KEY
+.env
+
+# Python cache files
+__pycache__/
+*.pyc

@@ -4,19 +4,21 @@ import sys
 from pathlib import Path
 
 import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 
+load_dotenv()
 
-def load_api_key():
-    """Load the OpenAI API key from .env file or environment variables."""
-    load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
+# The OpenAI client automatically looks for the OPENAI_API_KEY environment variable.
+client = OpenAI()
+
+
+def check_api_key():
+    """Check if the OpenAI API key is available in environment variables."""
+    if not os.getenv("OPENAI_API_KEY"):
         print("Error: OPENAI_API_KEY not found.")
         print("Please set it in a .env file or as an environment variable.")
         sys.exit(1)
-    openai.api_key = api_key
-
 
 def read_file_content(file_path: Path) -> str:
     """Read the content of a file."""
@@ -26,13 +28,14 @@ def read_file_content(file_path: Path) -> str:
     return file_path.read_text()
 
 
-def generate_threat_model(architecture_doc: str, prompt_template: str) -> str:
+def generate_threat_model(architecture_doc: str, prompt_template: str, model_name: str) -> str:
     """
     Generates a threat model report by calling the OpenAI API.
 
     Args:
         architecture_doc: The string content of the system architecture.
         prompt_template: The few-shot prompt template.
+        model_name: The OpenAI model to use for generation.
 
     Returns:
         The generated threat model report as a string.
@@ -41,17 +44,15 @@ def generate_threat_model(architecture_doc: str, prompt_template: str) -> str:
     try:
         final_prompt = prompt_template.format(user_architecture=architecture_doc)
 
-        response = openai.ChatCompletion.create(
-            model="gpt-4-turbo-preview",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": final_prompt},
-            ],
-            temperature=0.2,
-        )
+        response = client.chat.completions.create(model=model_name,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": final_prompt},
+        ],
+        temperature=0.2)
         print("✅ Report generated successfully.")
         return response.choices[0].message.content
-    except openai.error.OpenAIError as e:
+    except openai.OpenAIError as e:
         print(f"Error calling OpenAI API: {e}")
         sys.exit(1)
 
@@ -88,9 +89,15 @@ def main():
         default=None,
         help="Path to save the output markdown report. If not provided, prints to console.",
     )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="gpt-4o",
+        help="The OpenAI model to use (e.g., gpt-4o, gpt-4-turbo, gpt-3.5-turbo).",
+    )
     args = parser.parse_args()
 
-    load_api_key()
+    check_api_key()
 
     # Determine the correct prompt file based on the chosen framework
     prompt_filename = f"{args.framework.lower()}_threat_model_generator.md"
@@ -102,7 +109,7 @@ def main():
     print(f"🧠 Using {args.framework} framework. Reading prompt from: {prompt_path}")
     prompt_template_content = read_file_content(prompt_path)
 
-    report = generate_threat_model(architecture_content, prompt_template_content)
+    report = generate_threat_model(architecture_content, prompt_template_content, args.model)
 
     if args.output:
         save_report(report, args.output)
