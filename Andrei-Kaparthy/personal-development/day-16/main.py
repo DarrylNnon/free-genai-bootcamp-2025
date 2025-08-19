@@ -1,3 +1,4 @@
+# python script for testing, do not include it to the root folder. this was the original before moddification
 import os
 import sys
 import argparse
