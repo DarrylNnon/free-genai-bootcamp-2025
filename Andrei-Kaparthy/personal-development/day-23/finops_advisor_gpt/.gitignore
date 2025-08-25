@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual Environment
+.venv/
+venv/
+
+# Environment Variables - Keep secrets out of git!
+.env
+
+# IDE configuration
+.idea/
+.vscode/
+
+# Generated Reports
+finops_report.md

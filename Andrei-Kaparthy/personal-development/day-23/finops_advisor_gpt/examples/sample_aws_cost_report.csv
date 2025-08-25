@@ -1,0 +1,15 @@
+Service,LinkedAccount,UsageType,Cost
+Amazon Elastic Compute Cloud,111122223333,BoxUsage:t3.micro,15.75
+Amazon Elastic Compute Cloud,111122223333,DataTransfer-Out-Bytes,250.40
+Amazon Simple Storage Service,111122223333,StandardStorage,120.50
+Amazon Simple Storage Service,111122223333,Requests-Tier1,30.10
+Amazon Relational Database Service,111122223333,InstanceUsage:db.t3.medium,150.25
+Amazon Relational Database Service,444455556666,InstanceUsage:db.m5.large,350.00
+AWS Lambda,444455556666,Requests,55.80
+AWS Lambda,444455556666,Duration,40.15
+Amazon Elastic Compute Cloud,444455556666,BoxUsage:m5.xlarge,450.90
+Amazon Elastic Compute Cloud,777788889999,NatGateway-Bytes,180.30
+Amazon Simple Storage Service,777788889999,TimedStorage-GlacierDeepArchive,5.50
+AWS Key Management Service,111122223333,Requests,0.50
+AWS Secrets Manager,444455556666,Secret-Version,2.10
+Amazon Elastic Compute Cloud,111122223333,EBS:VolumeUsage.gp2,45.60
