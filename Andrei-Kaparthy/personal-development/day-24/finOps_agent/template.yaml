@@ -30,8 +30,8 @@ Resources:
               Resource: "*"
       Environment:
         Variables:
-          OPENAI_API_KEY: "{{resolve:ssm:/finops/openai/apikey:1}}"
-          SLACK_WEBHOOK_URL: "{{resolve:ssm:/finops/slack/webhook:1}}"
+          OPENAI_API_KEY: "{{resolve:ssm-secure:/finops/openai/apikey:1}}"
+          SLACK_WEBHOOK_URL: "{{resolve:ssm-secure:/finops/slack/webhook:1}}"
           PROMPT_FILE: "prompts/cost_anomaly_remediation.md"
           AGENT_MODE: "ALERT_ONLY" # Use "AUTO_REMEDIATE" with extreme caution
       Events:
