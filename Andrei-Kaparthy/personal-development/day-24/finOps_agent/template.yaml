@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  finops-agent
+
+  SAM template for the FinOps Agent Lambda function.
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Runtime: python3.12
+
+Resources:
+  FinOpsAgentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: main.lambda_handler
+      Description: Analyzes AWS Cost Anomalies and suggests remediation.
+      Policies:
+        # Add policies required by your agent.
+        # This is a starting point. BE CAREFUL IN PRODUCTION.
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ce:GetAnomalies
+                - ce:GetCostAndUsage
+                - ec2:DescribeVolumes # For the example remediation
+              Resource: "*"
+      Environment:
+        Variables:
+          OPENAI_API_KEY: "{{resolve:ssm:/finops/openai/apikey:1}}"
+          SLACK_WEBHOOK_URL: "{{resolve:ssm:/finops/slack/webhook:1}}"
+          PROMPT_FILE: "prompts/cost_anomaly_remediation.md"
+          AGENT_MODE: "ALERT_ONLY" # Use "AUTO_REMEDIATE" with extreme caution
+      Events:
+        SNSTrigger:
+          Type: SNS
+          Properties:
+            Topic: !Ref AnomalyNotificationTopic
+
+  AnomalyNotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: CostAnomalyNotifications
+
+Outputs:
+  FinOpsAgentFunctionArn:
+    Description: "FinOps Agent Lambda Function ARN"
+    Value: !GetAtt FinOpsAgentFunction.Arn
+  AnomalyNotificationTopicArn:
+    Description: "SNS topic for Cost Anomaly notifications"
+    Value: !Ref AnomalyNotificationTopic

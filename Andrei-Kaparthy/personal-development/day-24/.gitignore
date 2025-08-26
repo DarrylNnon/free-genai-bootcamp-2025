@@ -1,0 +1,25 @@
+# AWS SAM
+.aws-sam/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Environment variables
+.env
+.env.*
+
+# IDE configuration
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
