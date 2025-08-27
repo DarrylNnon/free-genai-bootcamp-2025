@@ -1,0 +1,63 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #0d6efd;
+}
+
+.header p {
+    margin: 5px 0 0;
+    color: #6c757d;
+}
+
+.upload-container {
+    text-align: center;
+    padding: 40px;
+    border: 2px dashed #0d6efd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.graphs-container, .report-container-main {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.report-container-main h3 {
+    margin-top: 0;
+    color: #0d6efd;
+}
+
+.report-button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}

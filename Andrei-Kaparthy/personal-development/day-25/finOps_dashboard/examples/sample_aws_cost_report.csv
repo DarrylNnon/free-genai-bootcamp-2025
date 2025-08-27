@@ -1,0 +1,6 @@
+Service,UsageStartDate,Cost,Region
+Amazon Elastic Compute Cloud - Compute,2023-10-01,150.75,us-east-1
+Amazon Relational Database Service,2023-10-01,85.30,us-east-1
+AWS Data Transfer,2023-10-01,550.20,global
+Amazon Simple Storage Service,2023-10-02,45.10,us-east-1
+Amazon Elastic Compute Cloud - Compute,2023-10-02,155.00,us-east-1
