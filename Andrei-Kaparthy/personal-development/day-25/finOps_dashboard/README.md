@@ -45,17 +45,21 @@ This approach combines the best of data visualization and generative AI, creatin
 
 All the code for this project is located in the `finops_dashboard/` directory. Please see the `finops_dashboard/README.md` for detailed setup and execution instructions.
 
-# 📈 Interactive FinOps Dashboard
+# 🏆 Enterprise FinOps Dashboard
 
-This Dash application provides an interactive interface for analyzing AWS Cost and Usage reports. It combines data visualization with GPT-powered analysis to deliver actionable FinOps insights.
+This is a professional, enterprise-grade Dash application for interactive analysis of AWS Cost and Usage reports. It combines a rich, modern user interface with powerful data visualization and GPT-powered analysis to deliver actionable FinOps insights.
 
 ## 🚀 Features
 
 - **Interactive File Upload**: Users can upload their own AWS Cost CSV files.
-- **Dynamic Visualizations**: Automatically generates graphs for cost by service and cost over time.
+- **Polished UI**: Built with Dash Bootstrap Components for a professional look and feel.
+- **Light/Dark Mode**: An interactive switch to toggle between themes.
+- **KPI Cards**: At-a-glance metrics for Total Cost, Top Service, and more.
+- **Dynamic Visualizations**: Automatically generates multiple, linked graphs for cost by service, cost over time, and cost by region.
 - **On-Demand AI Analysis**: A "Generate Report" button triggers a call to GPT-4o to analyze the cost data.
+- **Enhanced UX**: Includes loading spinners for long-running operations like AI report generation.
 - **Few-Shot Prompting**: Uses the expertly crafted prompt from Day 23 to ensure a high-quality, structured analysis.
-- **Clean, Modern UI**: A simple and professional interface built with Dash and a custom stylesheet.
+- **Performant State Management**: Uses `dcc.Store` to manage the state of the uploaded data efficiently in the browser.
 
 ## 🛠️ Setup and Installation
 
@@ -71,7 +75,7 @@ Follow these steps to get the dashboard running on your local machine.
 It's highly recommended to use a virtual environment to manage dependencies.
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 # On Windows, use: .venv\Scripts\activate
 ```
@@ -79,7 +83,7 @@ source .venv/bin/activate
 ### 3. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install dash dash-bootstrap-components pandas openai python-dotenv
 ```
 
 ### 4. Configure Environment Variables
