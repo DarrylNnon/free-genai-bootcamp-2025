@@ -1,0 +1,26 @@
+name: Smart Review
+url: https://smart-review.com # Our future marketing site
+
+# This is the webhook endpoint where GitHub will send events.
+# We will get this URL after deploying our backend.
+webhook_url: https://<your-api-gateway-id>.execute-api.us-east-1.amazonaws.com/Prod/webhook
+
+# A secret to verify that webhooks are coming from GitHub.
+# We will set this in our Lambda's environment variables.
+webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+
+# The permissions our app needs to function.
+# We request the minimum necessary permissions.
+permissions:
+  # Read access to code to get the diff
+  contents: read
+  # Write access to post comments on pull requests
+  pull_requests: write
+
+# The events we want to subscribe to.
+# We trigger on pull requests being opened or updated.
+events:
+  - pull_request
+
+# A public-facing description of our app.
+description: An AI-powered code reviewer that provides actionable feedback on security, performance, and best practices.
