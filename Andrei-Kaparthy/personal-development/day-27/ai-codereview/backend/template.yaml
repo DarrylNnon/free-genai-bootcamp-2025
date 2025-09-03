@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Smart Review Backend
+
+  This stack contains the core backend for the Smart Review service.
+  It includes an API Gateway and a Lambda function to process GitHub webhooks.
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 256
+    Architectures:
+      - x86_64
+
+Parameters:
+  GitHubAppIdParam:
+    Type: String
+    Default: /smart-review/github/app-id
+  GitHubWebhookSecretParam:
+    Type: String
+    Default: /smart-review/github/webhook-secret
+  GitHubPrivateKeyParam:
+    Type: String
+    Default: /smart-review/github/private-key
+  OpenAIAPIKeyParam:
+    Type: String
+    Default: /smart-review/openai/api-key
+
+Resources:
+  WebhookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: webhook/
+      Handler: bootstrap
+      Runtime: provided.al2
+      Events:
+        WebhookEvent:
+          Type: Api
+          Properties:
+            Path: /webhook
+            Method: post
+      Policies:
+        - SSMReadPolicy:
+            ParameterName: !Ref GitHubAppIdParam
+        - SSMReadPolicy:
+            ParameterName: !Ref GitHubWebhookSecretParam
+        - SSMReadPolicy:
+            ParameterName: !Ref GitHubPrivateKeyParam
+        - SSMReadPolicy:
+            ParameterName_CI: !Ref OpenAIAPIKeyParam
+      Environment:
+        Variables:
+          GITHUB_APP_ID_PARAM: !Ref GitHubAppIdParam
+          GITHUB_WEBHOOK_SECRET_PARAM: !Ref GitHubWebhookSecretParam
+          GITHUB_PRIVATE_KEY_PARAM: !Ref GitHubPrivateKeyParam
+          OPENAI_API_KEY_PARAM: !Ref OpenAIAPIKeyParam
+
+Outputs:
+  WebhookApiUrl:
+    Description: "API Gateway endpoint URL for the Smart Review webhook"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/webhook/"
+  WebhookFunctionArn:
+    Description: "Webhook Lambda Function ARN"
+    Value: !GetAtt WebhookFunction.Arn
+  WebhookFunctionIamRole:
+    Description: "Implicit IAM Role created for Webhook function"
+    Value: !GetAtt WebhookFunctionRole.Arn
