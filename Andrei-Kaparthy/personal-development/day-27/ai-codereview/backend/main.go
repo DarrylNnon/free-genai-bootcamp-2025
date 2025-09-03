@@ -79,7 +79,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	// TODO (Phase 6): Post comment back to PR
 	// Use the installation access token to post the AI's analysis as a comment on the PR.
 
-	return events.APIGatewayProxyResponse{StatusCode: 200, Body: fmt.Sprintf("{\"status\":\"success\", \"message\":\"Webhook received\"}")}, nil
+	return events.APIGatewayProxyResponse{StatusCode: 200, Body: fmt.Sprintf("{\"status\":\"success\", \"message\":\"Webhook received and verified.\"}"\"}")}, nil
 }
 
 func main() {
